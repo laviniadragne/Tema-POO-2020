@@ -166,12 +166,26 @@ public final class User {
         List<Show> searchList = new ArrayList<>();
         for (Show show : shows) {
             if (history.get(show.getTitle()) == null) {
-                System.out.println(show.getTitle() + " " + show.sumRatings());
                 searchList.add(show);
             }
         }
 
         return searchList;
+    }
+
+    public void addvideoFavorite(List<Show> shows) {
+        // pentru toate filmele favorite ale unui user
+        // le caut in lista de show-uri si le maresc
+        // numarul total de fav aparitii
+        for(String favorite : getFavoriteMovies()) {
+            for(Show show : shows) {
+                if(show.getTitle().equals(favorite)) {
+                    int total = show.getTotalFav();
+                    total++;
+                    show.setTotalFav(total);
+                }
+            }
+        }
     }
 
     @Override

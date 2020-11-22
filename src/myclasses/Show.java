@@ -25,6 +25,7 @@ public abstract class Show {
 
     private int indexDataBase;
 
+    private int totalFav;
 
     public Show(final String title, final int year,
                      final ArrayList<String> cast, final ArrayList<String> genres, int indexDataBase) {
@@ -33,6 +34,7 @@ public abstract class Show {
         this.cast = cast;
         this.genres = genres;
         this.indexDataBase = indexDataBase;
+        this.totalFav = 0;
     }
 
     public final String getTitle() {
@@ -59,6 +61,14 @@ public abstract class Show {
         this.indexDataBase = indexDataBase;
     }
 
+    public int getTotalFav() {
+        return totalFav;
+    }
+
+    public void setTotalFav(int totalfav) {
+        this.totalFav = totalfav;
+    }
+
     public abstract double sumRatings();
 
         // verifica daca un movie contine field-urile
@@ -70,6 +80,10 @@ public abstract class Show {
                 return false;
             }
         }
+        // daca lista a 2-a de criterii e goala
+        if (filters.get(1).get(0) == null)
+            return true;
+
         // verific daca este din genul caracteristic
         for (String filter : filters.get(1)) {
             for (String genre : getGenres()) {
@@ -91,7 +105,7 @@ public abstract class Show {
         int aparitions = 0;
         for (User user : myUsers.getUsersList()) {
             for (String favoriteShow : user.getFavoriteMovies()) {
-                if(favoriteShow.equals(getTitle())) {
+                if (favoriteShow.equals(getTitle())) {
                     aparitions++;
                 }
             }

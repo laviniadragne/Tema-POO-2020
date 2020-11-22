@@ -72,4 +72,19 @@ public class ShowsList {
         }
         return specificShows;
     }
+
+    // sorteaza dupa numarul de rating-uri o lista de show-uri
+    // si dupa numele lor
+    public void searchfavoriteSort() {
+        Collections.sort(ShowsList, new Comparator<Show>() {
+            @Override
+            public int compare(Show s1, Show s2) {
+                if (s1.getTotalFav() != s2.getTotalFav()) {
+                    return Double.compare (s2.getTotalFav(), s1.getTotalFav());
+                }
+                return Double.compare(s1.getIndexDataBase(), s2.getIndexDataBase());
+            }
+        });
+
+    }
 }

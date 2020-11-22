@@ -29,6 +29,14 @@ public class UsersList {
         return null;
     }
 
+    // calculeaza numarul total de aparitii favorite
+    // ale tuturor filmelor de la toti userii
+    public void addlistFav(List<Show> shows) {
+        for (User user : getUsersList()) {
+            user.addvideoFavorite(shows);
+        }
+    }
+
     public void ratingsSort(String criteria) {
         if (criteria.equals("asc")) {
             Collections.sort(UsersList, new Comparator<User>() {

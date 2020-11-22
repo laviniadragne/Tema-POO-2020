@@ -195,7 +195,6 @@ public final class Main {
                         String message = new String();
                         // verific daca userul e premium
                         User premiumUser = myUsersClass.getUser(action.getUsername());
-                        System.out.println(filePath1);
                         if (premiumUser.getSubscriptionType().equals("PREMIUM")) {
                             ShowsList classshowsFind = new ShowsList(myShows);
                             // caut in baza de date filmele cu acel gen
@@ -223,6 +222,41 @@ public final class Main {
                                 "null", message);
                         arrayResult.add(newObj);
                     }
+
+                if (action.getType().equals("favorite")) {
+
+                    String message = new String();
+                    // verific daca userul e premium
+                    User premiumUser = myUsersClass.getUser(action.getUsername());
+                    if (premiumUser.getSubscriptionType().equals("PREMIUM")) {
+
+                        // imi creez o copie a clasei de seriale
+                        ShowsList classshowsFav = new ShowsList(myShows);
+
+                        // adaug in de pe listele de fav ale userilor in campurile de la show
+                        // totalfav
+                        myUsersClass.addlistFav(myShows);
+
+                        // ordonez serialele
+                        classshowsFav.searchfavoriteSort();
+
+                        // primul video nevazut
+                        String nameFav = premiumUser.unseen(classshowsFav.getShowsList());
+
+                        if (nameFav == null) {
+                            message = message + "FavoriteRecommendation cannot be applied!";
+                        } else {
+                            message = message + "FavoriteRecommendation result: ";
+                            message = message + nameFav;
+                        }
+                    }
+                    else {
+                        message = message + "FavoriteRecommendation cannot be applied!";
+                    }
+                    JSONObject newObj = fileWriter.writeFile(action.getActionId(),
+                            "null", message);
+                    arrayResult.add(newObj);
+                }
 
                 }
             else {
@@ -403,6 +437,17 @@ public final class Main {
                         }
                         if (action.getCriteria().equals("favorite")) {
                             myMoviesClass.favoritesort(myUsersClass, action.getSortType());
+
+
+
+                            System.out.println(filePath1);
+                            System.out.println("-------" + action.getActionId()+ "-------");
+                            for(Movie movie : myMoviesClass.getMoviesList()) {
+                                System.out.println(movie.getTitle() + " " + movie.aparitionFavorite(myUsersClass));
+                            }
+
+
+
                             String message = new String();
                             message = message + "Query result: ";
                             List<String> message1 = myMoviesClass.writeFavAparition(action.getNumber(), action.getFilters(), myUsersClass);
