@@ -28,6 +28,7 @@ public class UsersList {
         }
         return null;
     }
+
     public void ratingsSort(String criteria) {
         if (criteria.equals("asc")) {
             Collections.sort(UsersList, new Comparator<User>() {

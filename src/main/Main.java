@@ -87,6 +87,7 @@ public final class Main {
         List<Actor> myActors = new ArrayList<>();
         List<Movie> myMovies = new ArrayList<>();
         List<Serial> mySerials = new ArrayList<>();
+        List<Show> myShows = new ArrayList<>();
 
         for (UserInputData userInput : userList) {
             String username = userInput.getUsername();
@@ -139,41 +140,89 @@ public final class Main {
             index2++;
         }
 
-
+        myShows.addAll(myMovies);
+        myShows.addAll(mySerials);
 
         for (ActionInputData action : actionList) {
             if (action.getActionType().equals("recommendation")) {
+                ActorsList myActorsClass = new ActorsList(myActors);
+                UsersList myUsersClass = new UsersList(myUsers);
+                MoviesList myMoviesClass = new MoviesList(myMovies);
+                SerialsList mySerialsClass = new SerialsList(mySerials);
+                ShowsList myShowsClass = new ShowsList(myShows);
+
+
                 if (action.getType().equals("standard")) {
-                    for (UserInputData users: userList) {
-                        // daca am gasit user-ul din action in lista de useri
-                        if (users.getUsername().equals(action.getUsername())) {
-                            // cat timp e un film vazut de user caut in lista de
-                            // filme
-                            for (MovieInputData movies: movieList) {
-                                Map<String, Integer> usermapMovie = users.getHistory();
-                                // caut dupa titlul filmelor in map-ul de filme al userului
-                                Integer unseen = usermapMovie.get(movies.getTitle());
-                                // nu l-am gasit, e primul pe care nu l-a vazut
-                                if (unseen == null) {
 
-                                    String field = null;
-                                    String message = new String("StandardRecommendation result: ");
-                                    message = message + movies.getTitle();
-                                    JSONObject newObj = fileWriter.writeFile(action.getActionId(),
-                                                                            field, message);
-                                    arrayResult.add(newObj);
-                                    break;
-                                }
-                            }
-                            // acelasi lucru ar fi trebuit sa-l fac si pentru serialList
-                            // scriu filmul
-                            break;
-                        }
+                    String message = new String();
+                    String username = action.getUsername();
+                    User user = myUsersClass.getUser(username);
+                    String unseenVideo = user.unseen(myShowsClass.getShowsList());
+                    if (unseenVideo == null) {
+                        message = message + "StandardRecommendation cannot be applied!";
                     }
-                }
-                if (action.getType().equals("recommendation")) {
+                    else {
+                        message = message + "StandardRecommendation result: ";
+                        message = message + unseenVideo;
+                    }
+                    JSONObject newObj = fileWriter.writeFile(action.getActionId(),
+                            "null", message);
+                    arrayResult.add(newObj);
+
 
                 }
+
+                     if (action.getType().equals("best_unseen")) {
+
+                         myShowsClass.bestunseenSort();
+                         String message = new String();
+                         String username = action.getUsername();
+                         User user = myUsersClass.getUser(username);
+                         String unseenVideo = user.unseen(myShowsClass.getShowsList());
+                         if (unseenVideo == null) {
+                             message = message + "BestRatedUnseenRecommendation cannot be applied!";
+                         }
+                         else {
+                             message = message + "BestRatedUnseenRecommendation result: ";
+                             message = message + unseenVideo;
+                         }
+                         JSONObject newObj = fileWriter.writeFile(action.getActionId(),
+                                            "null", message);
+                         arrayResult.add(newObj);
+                         }
+                    if (action.getType().equals("search")) {
+
+                        String message = new String();
+                        // verific daca userul e premium
+                        User premiumUser = myUsersClass.getUser(action.getUsername());
+                        System.out.println(filePath1);
+                        if (premiumUser.getSubscriptionType().equals("PREMIUM")) {
+                            ShowsList classshowsFind = new ShowsList(myShows);
+                            // caut in baza de date filmele cu acel gen
+                            List<Show> showsFind = myShowsClass.searchGenre(action.getGenre());
+                            classshowsFind.setShowsList(showsFind);
+
+
+                            String username = action.getUsername();
+                            User user = myUsersClass.getUser(username);
+                            List<Show> searchVideo = user.searchList(classshowsFind.getShowsList());
+                            classshowsFind.setShowsList(searchVideo);
+                            classshowsFind.searchunseenSort();
+
+                            if (classshowsFind.getShowsList().size() == 0) {
+                                message = message + "SearchRecommendation cannot be applied!";
+                            } else {
+                                message = message + "SearchRecommendation result: ";
+                                message = message + classshowsFind.getshowsName();
+                            }
+                        }
+                        else {
+                            message = message + "SearchRecommendation cannot be applied!";
+                        }
+                        JSONObject newObj = fileWriter.writeFile(action.getActionId(),
+                                "null", message);
+                        arrayResult.add(newObj);
+                    }
 
                 }
             else {

@@ -133,6 +133,7 @@ public class MoviesList {
 
         }
     }
+
     // scrie intr-un string pe primele N filme cu rating-ul
     // diferit de 0
     public List<String> writeSortedMovies (int n, List<List<String>> filters) {

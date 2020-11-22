@@ -1,5 +1,6 @@
 package myclasses;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -143,6 +144,34 @@ public final class User {
         }
         answer  = answer + "error -> " + video + " is not seen";
         return answer;
+    }
+
+    // cauta in history ul user-ului filmele din lista
+    // si il intoarce pe primul nevazut, cel mai popular
+    public String unseen(List<Show> shows) {
+
+        for (Show show : shows) {
+            if (history.get(show.getTitle()) == null) {
+                return show.getTitle();
+            }
+        }
+
+        return null;
+    }
+
+    // cauta in history ul user-ului filmele din lista
+    // si le intoarce pe cele nevazute dupa gen
+    public List<Show> searchList(List<Show> shows) {
+
+        List<Show> searchList = new ArrayList<>();
+        for (Show show : shows) {
+            if (history.get(show.getTitle()) == null) {
+                System.out.println(show.getTitle() + " " + show.sumRatings());
+                searchList.add(show);
+            }
+        }
+
+        return searchList;
     }
 
     @Override

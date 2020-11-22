@@ -59,7 +59,9 @@ public abstract class Show {
         this.indexDataBase = indexDataBase;
     }
 
-    // verifica daca un movie contine field-urile
+    public abstract double sumRatings();
+
+        // verifica daca un movie contine field-urile
     public boolean filtersVideos(List<List<String>> filters){
         List<String> year = filters.get(0);
         // verific daca filmul are anul caracteristic
