@@ -87,4 +87,13 @@ public class ShowsList {
         });
 
     }
+    public void indexdbSort() {
+        Collections.sort(ShowsList, new Comparator<Show>() {
+            @Override
+            public int compare(Show s1, Show s2) {
+                return Double.compare(s1.getIndexDataBase(), s2.getIndexDataBase());
+            }
+        });
+
+    }
 }

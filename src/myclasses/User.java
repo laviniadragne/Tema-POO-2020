@@ -92,7 +92,7 @@ public final class User {
         // daca nu a mai fost vizionat
         if (indexMovie == null) {
             // il adaug la history
-            history.putIfAbsent(movie, 1);
+            history.put(movie, 1);
         }
         else {
             // ii cresc numarul de vizionari
@@ -155,7 +155,6 @@ public final class User {
                 return show.getTitle();
             }
         }
-
         return null;
     }
 

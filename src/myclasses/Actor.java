@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Actor {
@@ -185,10 +186,9 @@ public final class Actor {
                 for (String word : filter) {
                     // daca nu gasesc un cuvant dau break;
                     if (word != null) {
-                        word = " " + word + " ";
-                        if (!Pattern.compile(Pattern.quote(word), Pattern.CASE_INSENSITIVE).matcher(getCareerDescription()).find()) {
-                            found = 0;
-                            break;
+                       if (!Pattern.compile(("[ -?!'.,(]" + word + "[ ?!-'.,)]"), Pattern.CASE_INSENSITIVE).matcher(getCareerDescription()).find()) {
+                           found = 0;
+                           break;
                         }
                     }
                 }
@@ -199,27 +199,6 @@ public final class Actor {
         }
         return null;
     }
-
-//    public String awards (List<String> awards) {
-//        boolean found = true;
-//        for (String award : awards) {
-//            // trebuie sa-i trimit ca parametru un ActorsAwards, nu un string
-//
-//            // TO DO
-//            Integer numAwards = getAwards().get(award);
-//            // premiul respectiv nu este castigat de acel actor
-//            if(numAwards == null) {
-//                found = false;
-//                break;
-//            }
-//        }
-//        if (found == true) {
-//            return getName();
-//        }
-//        else {
-//            return null;
-//        }
-//    }
 
     // metoda calculeaza numarul total de premii din cele de la input
     // primite de un actor si returneaza 0 in cazul in care

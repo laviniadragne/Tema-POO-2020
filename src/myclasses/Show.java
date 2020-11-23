@@ -124,4 +124,14 @@ public abstract class Show {
         return sumViews;
     }
 
+    // metoda intoarce daca show-ul are un gen dat ca si parametru
+    public boolean presentGenre(String name) {
+        for (String nameGenre : getGenres()) {
+            if(nameGenre.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
