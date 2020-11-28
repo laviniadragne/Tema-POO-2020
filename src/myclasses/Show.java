@@ -1,9 +1,7 @@
 package myclasses;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public abstract class Show {
     /**
@@ -23,7 +21,7 @@ public abstract class Show {
      */
     private final ArrayList<String> genres;
 
-    private int indexDataBase;
+    private final int indexDataBase;
 
     private int totalFav;
 
@@ -55,10 +53,6 @@ public abstract class Show {
 
     public int getIndexDataBase() {
         return indexDataBase;
-    }
-
-    public void setIndexDataBase(int indexDataBase) {
-        this.indexDataBase = indexDataBase;
     }
 
     public int getTotalFav() {
@@ -93,10 +87,7 @@ public abstract class Show {
             }
         }
         // daca nu am filtre
-        if (year.get(0) == null && filters.get(1).get(0) == null) {
-            return true;
-        }
-        return false;
+        return year.get(0) == null && filters.get(1).get(0) == null;
     }
 
     // functia calculeaza numarul de aparitii ale show-ului

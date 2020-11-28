@@ -1,15 +1,10 @@
 package myclasses;
 
-import entertainment.Genre;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class GenresList {
 
-    private List<myGenre> GenresList;
+    private final List<myGenre> GenresList;
 
     public GenresList(List<myGenre> GenresList) {
         this.GenresList = GenresList;
@@ -59,10 +54,6 @@ public class GenresList {
         return GenresList;
     }
 
-    public void setGenresList(List<myGenre> genresList) {
-        GenresList = genresList;
-    }
-
     // metoda cauta fiecare gen in baza de date de view-urilor ale show-urilor
     // si calculeaza numarul total de view-uri pentru acel gen
     public void calculatePopular(ShowsList myShows, UsersList myUsers) {
@@ -88,12 +79,7 @@ public class GenresList {
 
     // sorteaza dupa numarul de view-uri o lista de genuri
     public void searchPopularSort() {
-        Collections.sort(GenresList, new Comparator<myGenre>() {
-            @Override
-            public int compare(myGenre g1, myGenre g2) {
-                return Double.compare(g2.getNumberViews(), g1.getNumberViews());
-            }
-        });
+        GenresList.sort((g1, g2) -> Double.compare(g2.getNumberViews(), g1.getNumberViews()));
     }
 
     // returneaza primul show nevazut din cel mai popular gen

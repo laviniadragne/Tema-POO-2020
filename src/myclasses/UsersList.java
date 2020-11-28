@@ -1,8 +1,6 @@
 package myclasses;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class UsersList {
@@ -20,6 +18,9 @@ public class UsersList {
         UsersList = usersList;
     }
 
+    /* Cauta in lista un user cu un nume dat si il
+        returneaza
+    */
     public User getUser(String name) {
         for (User user : UsersList) {
             if(user.getUsername().equals(name)) {
@@ -39,26 +40,20 @@ public class UsersList {
 
     public void ratingsSort(String criteria) {
         if (criteria.equals("asc")) {
-            Collections.sort(UsersList, new Comparator<User>() {
-                @Override
-                public int compare(User u1, User u2) {
-                    if (u1.getNumberRatings() != u2.getNumberRatings()) {
-                        return Double.compare (u1.getNumberRatings(), u2.getNumberRatings());
-                    }
-                    return u1.getUsername().compareTo(u2.getUsername());
+            UsersList.sort((u1, u2) -> {
+                if (!u1.getNumberRatings().equals(u2.getNumberRatings())) {
+                    return Double.compare(u1.getNumberRatings(), u2.getNumberRatings());
                 }
+                return u1.getUsername().compareTo(u2.getUsername());
             });
 
         }
         if (criteria.equals("desc")) {
-            Collections.sort(UsersList, new Comparator<User>() {
-                @Override
-                public int compare(User u1, User u2) {
-                    if (u1.getNumberRatings() != u2.getNumberRatings()) {
-                        return Double.compare (u2.getNumberRatings(), u1.getNumberRatings());
-                    }
-                    return u2.getUsername().compareTo(u1.getUsername());
+            UsersList.sort((u1, u2) -> {
+                if (!u1.getNumberRatings().equals(u2.getNumberRatings())) {
+                    return Double.compare(u2.getNumberRatings(), u1.getNumberRatings());
                 }
+                return u2.getUsername().compareTo(u1.getUsername());
             });
 
         }

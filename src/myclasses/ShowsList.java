@@ -1,7 +1,6 @@
 package myclasses;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -33,14 +32,11 @@ public class ShowsList {
     // sorteaza dupa numarul de rating-uri o lista de show-uri
     // si dupa aparitia lor in baza de date
     public void bestunseenSort() {
-        Collections.sort(ShowsList, new Comparator<Show>() {
-            @Override
-            public int compare(Show s1, Show s2) {
-                if (s1.sumRatings() != s2.sumRatings()) {
-                    return Double.compare (s2.sumRatings(), s1.sumRatings());
-                }
-                return Double.compare(s1.getIndexDataBase(), s2.getIndexDataBase());
+        ShowsList.sort((s1, s2) -> {
+            if (s1.sumRatings() != s2.sumRatings()) {
+                return Double.compare(s2.sumRatings(), s1.sumRatings());
             }
+            return Double.compare(s1.getIndexDataBase(), s2.getIndexDataBase());
         });
 
     }
@@ -48,14 +44,11 @@ public class ShowsList {
     // sorteaza dupa numarul de rating-uri o lista de show-uri
     // si dupa numele lor
     public void searchunseenSort() {
-        Collections.sort(ShowsList, new Comparator<Show>() {
-            @Override
-            public int compare(Show s1, Show s2) {
-                if (s1.sumRatings() != s2.sumRatings()) {
-                    return Double.compare (s1.sumRatings(), s2.sumRatings());
-                }
-                return s1.getTitle().compareTo(s2.getTitle());
+        ShowsList.sort((s1, s2) -> {
+            if (s1.sumRatings() != s2.sumRatings()) {
+                return Double.compare(s1.sumRatings(), s2.sumRatings());
             }
+            return s1.getTitle().compareTo(s2.getTitle());
         });
 
     }
@@ -76,24 +69,16 @@ public class ShowsList {
     // sorteaza dupa numarul de rating-uri o lista de show-uri
     // si dupa numele lor
     public void searchfavoriteSort() {
-        Collections.sort(ShowsList, new Comparator<Show>() {
-            @Override
-            public int compare(Show s1, Show s2) {
-                if (s1.getTotalFav() != s2.getTotalFav()) {
-                    return Double.compare (s2.getTotalFav(), s1.getTotalFav());
-                }
-                return Double.compare(s1.getIndexDataBase(), s2.getIndexDataBase());
+        ShowsList.sort((s1, s2) -> {
+            if (s1.getTotalFav() != s2.getTotalFav()) {
+                return Double.compare(s2.getTotalFav(), s1.getTotalFav());
             }
+            return Double.compare(s1.getIndexDataBase(), s2.getIndexDataBase());
         });
 
     }
     public void indexdbSort() {
-        Collections.sort(ShowsList, new Comparator<Show>() {
-            @Override
-            public int compare(Show s1, Show s2) {
-                return Double.compare(s1.getIndexDataBase(), s2.getIndexDataBase());
-            }
-        });
-
+        ShowsList.sort(Comparator.comparingDouble(Show::getIndexDataBase));
     }
+
 }

@@ -1,6 +1,5 @@
 package myclasses;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +61,7 @@ public final class User {
      */
     public String addFavourite(final String movie) {
 
-        String answer = new String("error -> " + movie + " is not seen");
+        String answer = "error -> " + movie + " is not seen";
         // verific daca filmul e vizionat
         Integer indexMovie = history.get(movie);
         // daca l-am vizionat
@@ -84,7 +83,7 @@ public final class User {
 
     public String addView(final String movie) {
 
-        String answer = new String("success -> " + movie + " was viewed with total views of ");
+        String answer = "success -> " + movie + " was viewed with total views of ";
         int numberViews = 1;
         // verific daca filmul e vizionat
         Integer indexMovie = history.get(movie);
@@ -105,7 +104,7 @@ public final class User {
     }
 
     public String addRating(final String video, final double rating, int seznumber, List<Movie> myMovies, List<Serial> mySerials) {
-        String answer = new String();
+        String answer = "";
         // verific daca filmul e vizionat
         Integer indexVideo = history.get(video);
 

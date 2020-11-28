@@ -134,10 +134,6 @@ public final class Action {
         return username;
     }
 
-    public String getObjectType() {
-        return objectType;
-    }
-
     public String getSortType() {
         return sortType;
     }

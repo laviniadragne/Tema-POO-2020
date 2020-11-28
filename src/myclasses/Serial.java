@@ -3,7 +3,6 @@ package myclasses;
 import entertainment.Season;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public final class Serial extends Show {
     /**

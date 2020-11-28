@@ -2,7 +2,7 @@ package myclasses;
 
 public class myGenre {
 
-    private String nameGenre;
+    private final String nameGenre;
     private int numberViews;
 
     public myGenre(String nameGenre) {
@@ -12,10 +12,6 @@ public class myGenre {
 
     public String getNameGenre() {
         return nameGenre;
-    }
-
-    public void setNameGenre(String nameGenre) {
-        this.nameGenre = nameGenre;
     }
 
     public int getNumberViews() {

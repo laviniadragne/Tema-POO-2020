@@ -1,15 +1,12 @@
 package myclasses;
 
 import actor.ActorsAwards;
-import entertainment.Season;
 import fileio.MovieInputData;
 import fileio.SerialInputData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Actor {
@@ -28,7 +25,7 @@ public final class Actor {
     /**
      * awards won by the actor
      */
-    private Map<ActorsAwards, Integer> awards;
+    private final Map<ActorsAwards, Integer> awards;
 
     private ArrayList<String> serials;
 
@@ -36,13 +33,11 @@ public final class Actor {
 
     private double rating;
 
-    private int indexDataBase;
-
     private int numberAwards;
 
     public Actor(final String name, final String careerDescription,
-                          final ArrayList<String> filmography,
-                          final Map<ActorsAwards, Integer> awards, int indexDataBase) {
+                 final ArrayList<String> filmography,
+                 final Map<ActorsAwards, Integer> awards) {
         this.name = name;
         this.careerDescription = careerDescription;
         this.filmography = filmography;
@@ -50,7 +45,6 @@ public final class Actor {
         this.serials = new ArrayList<>();
         this.movies = new ArrayList<>();
         this.rating = 0;
-        this.indexDataBase = indexDataBase;
         this.numberAwards = 0;
     }
 
@@ -106,20 +100,8 @@ public final class Actor {
         this.rating = rating;
     }
 
-    public int getIndexDataBase() {
-        return indexDataBase;
-    }
-
-    public void setIndexDataBase(int indexDataBase) {
-        this.indexDataBase = indexDataBase;
-    }
-
     public int getNumberAwards() {
         return numberAwards;
-    }
-
-    public void setNumberAwards(int numberAwards) {
-        this.numberAwards = numberAwards;
     }
 
     public void calculateRating(List<Movie> myMovies, List<Serial> mySerials){
@@ -155,7 +137,7 @@ public final class Actor {
         }
 
         if (nrMovies + nrSerial != 0) {
-            this.rating = (double) (sumMovies + sumSerial) / (nrMovies + nrSerial);
+            this.rating = (sumMovies + sumSerial) / (nrMovies + nrSerial);
         }
     }
 
