@@ -6,33 +6,43 @@ import java.util.List;
 
 public class ShowsList {
 
-    private List<Show> ShowsList;
+    private List<Show> showsList;
 
-    public ShowsList(List<Show> showsList) {
-        ShowsList = showsList;
+    public ShowsList(final List<Show> inputshowsList) {
+        showsList = inputshowsList;
     }
 
+    /**
+     * Intoarce lista de video-uri
+     */
     public List<Show> getShowsList() {
-        return ShowsList;
+        return showsList;
     }
 
-    public void setShowsList(List<Show> showsList) {
-        ShowsList = showsList;
+    /**
+     * Seteaza lista de video-uri
+     */
+    public void setShowsList(final List<Show> inputshowsList) {
+        showsList = inputshowsList;
     }
 
-    // creeaza o lista cu numele shor-urilor
+    /**
+     * Creeaza o lista cu numele shor-urilor
+     */
     public List<String> getshowsName() {
         List<String> nameList = new ArrayList<>();
-        for(Show show : getShowsList()) {
+        for (Show show : getShowsList()) {
             nameList.add(show.getTitle());
         }
         return nameList;
     }
 
-    // sorteaza dupa numarul de rating-uri o lista de show-uri
-    // si dupa aparitia lor in baza de date
+    /**
+     * Sorteaza dupa numarul de rating-uri o lista de show-uri
+     * si dupa aparitia lor in baza de date
+     */
     public void bestunseenSort() {
-        ShowsList.sort((s1, s2) -> {
+        showsList.sort((s1, s2) -> {
             if (s1.sumRatings() != s2.sumRatings()) {
                 return Double.compare(s2.sumRatings(), s1.sumRatings());
             }
@@ -41,10 +51,12 @@ public class ShowsList {
 
     }
 
-    // sorteaza dupa numarul de rating-uri o lista de show-uri
-    // si dupa numele lor
+    /**
+     * Sorteaza dupa numarul de rating-uri o lista de show-uri
+     * si dupa numele lor
+     */
     public void searchunseenSort() {
-        ShowsList.sort((s1, s2) -> {
+        showsList.sort((s1, s2) -> {
             if (s1.sumRatings() != s2.sumRatings()) {
                 return Double.compare(s1.sumRatings(), s2.sumRatings());
             }
@@ -53,11 +65,13 @@ public class ShowsList {
 
     }
 
-    // creeaza o lista de show-uri dintr-un anumit gen
-    public List<Show> searchGenre(String criteria) {
+    /**
+     * Creeaza o lista de show-uri dintr-un anumit gen
+     */
+    public List<Show> searchGenre(final String criteria) {
         List<Show> specificShows = new ArrayList<>();
         for (Show show : getShowsList()) {
-            for(String genre : show.getGenres()) {
+            for (String genre : show.getGenres()) {
                 if (genre.equals(criteria)) {
                         specificShows.add(show);
                 }
@@ -66,10 +80,12 @@ public class ShowsList {
         return specificShows;
     }
 
-    // sorteaza dupa numarul de rating-uri o lista de show-uri
-    // si dupa numele lor
+    /**
+     * Sorteaza dupa numarul de rating-uri o lista de show-uri
+     * si dupa numele lor
+     */
     public void searchfavoriteSort() {
-        ShowsList.sort((s1, s2) -> {
+        showsList.sort((s1, s2) -> {
             if (s1.getTotalFav() != s2.getTotalFav()) {
                 return Double.compare(s2.getTotalFav(), s1.getTotalFav());
             }
@@ -77,8 +93,12 @@ public class ShowsList {
         });
 
     }
+
+    /**
+     * Sorteaza dupa indexul din baza de date
+     */
     public void indexdbSort() {
-        ShowsList.sort(Comparator.comparingDouble(Show::getIndexDataBase));
+        showsList.sort(Comparator.comparingDouble(Show::getIndexDataBase));
     }
 
 }

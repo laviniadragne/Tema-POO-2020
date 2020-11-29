@@ -2,14 +2,25 @@ package myclasses;
 
 import actor.ActorsAwards;
 import entertainment.Season;
-import fileio.*;
+import fileio.UserInputData;
+import fileio.Input;
+import fileio.ActorInputData;
+import fileio.MovieInputData;
+import fileio.SerialInputData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Assign {
-    public static UsersList assignUsers(Input input) {
+public final class Assign {
+
+    private Assign() {
+    }
+
+    /**
+     * Construieste lista de useri pe baza inputului data
+     */
+    public static UsersList assignUsers(final Input input) {
         List<User> myUsers = new ArrayList<>();
         for (UserInputData userInput : input.getUsers()) {
             String username = userInput.getUsername();
@@ -22,10 +33,12 @@ public class Assign {
             myUsers.add(newUser);
         }
         return new UsersList(myUsers);
-
     }
 
-    public static ActorsList assignActors(Input input) {
+    /**
+     * Construieste lista de actori pe baza inputului dat
+     */
+    public static ActorsList assignActors(final Input input) {
         List<Actor> myActors = new ArrayList<>();
         for (ActorInputData actorInput : input.getActors()) {
             String actorname = actorInput.getName();
@@ -41,7 +54,10 @@ public class Assign {
         return new ActorsList(myActors);
     }
 
-    public static MoviesList assignMovies(Input input) {
+    /**
+     * Construieste lista de movies pe baza inputului dat
+     */
+    public static MoviesList assignMovies(final Input input) {
         List<Movie> myMovies = new ArrayList<>();
         int index1 = 0;
         for (MovieInputData movieInput : input.getMovies()) {
@@ -58,8 +74,12 @@ public class Assign {
         return new MoviesList(myMovies);
     }
 
-    public static SerialsList assignSerials(Input input, int index) {
+    /**
+     * Construieste lista de serials pe baza inputului dat
+     */
+    public static SerialsList assignSerials(final Input input, final int index) {
         List<Serial> mySerials = new ArrayList<>();
+        int indexData = index;
         for (SerialInputData serialInput : input.getSerials()) {
             String title = serialInput.getTitle();
             ArrayList<String> cast = serialInput.getCast();
@@ -68,14 +88,18 @@ public class Assign {
             ArrayList<Season> seasons = serialInput.getSeasons();
             int year = serialInput.getYear();
 
-            Serial newSerial = new Serial(title, cast, genres, numseason, seasons, year, index);
+            Serial newSerial = new Serial(title, cast, genres, numseason, seasons, year, indexData);
             mySerials.add(newSerial);
-            index++;
+            indexData++;
         }
         return new SerialsList(mySerials);
     }
 
-    public static ShowsList assignShows(MoviesList myMoviesClass, SerialsList mySerialsClass) {
+    /**
+     * Construieste lista de videos pe baza inputului dat
+     */
+    public static ShowsList assignShows(final MoviesList myMoviesClass,
+                                        final SerialsList mySerialsClass) {
         List<Show> myShows = new ArrayList<>();
         myShows.addAll(myMoviesClass.getMoviesList());
         myShows.addAll(mySerialsClass.getSerialsList());

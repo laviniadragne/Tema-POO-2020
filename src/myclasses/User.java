@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public final class User {
+public class User {
     /**
      * User's username
      */
@@ -36,27 +36,44 @@ public final class User {
         this.numberRatings = 0;
     }
 
+    /**
+     * Intoarce numele userului
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Intoarce history-ul fiecarui user
+     */
     public Map<String, Integer> getHistory() {
         return history;
     }
 
+    /**
+     * Intoarce SubscriptionType-ul fiecarui user
+     */
     public String getSubscriptionType() {
         return subscriptionType;
     }
 
+    /**
+     * Intoarce filmele preferate ale fiecarui user
+     */
     public ArrayList<String> getFavoriteMovies() {
         return favoriteMovies;
     }
 
-    public Integer getNumberRatings() { return numberRatings; }
+    /**
+     * Intoarce cate rating-uri a dat fiecare user
+     */
+    public Integer getNumberRatings() {
+        return numberRatings;
+    }
 
 
     /**
-     * metoda intoarce un mesaj corespunzator pentru fiecare caz de add
+     * Metoda intoarce un mesaj corespunzator pentru fiecare caz de add
      * favourite in parte
      */
     public String addFavourite(final String movie) {
@@ -81,6 +98,9 @@ public final class User {
         return answer;
     }
 
+    /**
+     * Marcheaza un video ca si vazut
+     */
     public String addView(final String movie) {
 
         String answer = "success -> " + movie + " was viewed with total views of ";
@@ -92,8 +112,7 @@ public final class User {
         if (indexMovie == null) {
             // il adaug la history
             history.put(movie, 1);
-        }
-        else {
+        } else {
             // ii cresc numarul de vizionari
             indexMovie++;
             history.replace(movie, indexMovie);
@@ -103,7 +122,12 @@ public final class User {
         return answer;
     }
 
-    public String addRating(final String video, final double rating, int seznumber, List<Movie> myMovies, List<Serial> mySerials) {
+    /**
+     * Adauga rating unui video
+     */
+    public String addRating(final String video, final double rating, final int seznumber,
+                            final List<Movie> myMovies,
+                            final List<Serial> mySerials) {
         String answer = "";
         // verific daca filmul e vizionat
         Integer indexVideo = history.get(video);
@@ -117,22 +141,24 @@ public final class User {
                     if (!movie.getRatings().containsKey(this)) {
                         movie.getRatings().put(this, rating);
                         this.numberRatings++;
-                        answer = "success -> " + video + " was rated with " + rating +
-                                " by " + getUsername();
+                        answer = "success -> " + video + " was rated with " + rating
+                                + " by " + getUsername();
                         return answer;
                     }
                 }
             }
             // daca e serial
-            if(seznumber != 0) {
+            if (seznumber != 0) {
                 for (Serial serial : mySerials) {
                     if (serial.getTitle().equals(video)) {
                         // daca nu i-a fost acordat deja un rating de catre acest user
-                        if(!((serial.getSeasons()).get(seznumber - 1)).getRatingsUser().containsKey(this)) {
-                            (((serial.getSeasons()).get(seznumber - 1)).getRatingsUser()).put(this, rating);
+                        if (!((serial.getSeasons()).get(seznumber - 1))
+                                .getRatingsUser().containsKey(this)) {
+                            (((serial.getSeasons()).get(seznumber - 1))
+                                    .getRatingsUser()).put(this, rating);
                             this.numberRatings++;
-                            answer = "success -> " + video + " was rated with " + rating +
-                                    " by " + getUsername();
+                            answer = "success -> " + video + " was rated with " + rating
+                                    + " by " + getUsername();
                             return answer;
                         }
                     }
@@ -145,9 +171,11 @@ public final class User {
         return answer;
     }
 
-    // cauta in history ul user-ului filmele din lista
-    // si il intoarce pe primul nevazut, cel mai popular
-    public String unseen(List<Show> shows) {
+    /**
+     * Cauta in history ul user-ului filmele din lista
+     * si il intoarce pe primul nevazut, cel mai popular
+     */
+    public String unseen(final List<Show> shows) {
 
         for (Show show : shows) {
             if (history.get(show.getTitle()) == null) {
@@ -157,9 +185,11 @@ public final class User {
         return null;
     }
 
-    // cauta in history ul user-ului filmele din lista
-    // si le intoarce pe cele nevazute dupa gen
-    public List<Show> searchList(List<Show> shows) {
+    /**
+     * Cauta in history ul user-ului filmele din lista
+     * si le intoarce pe cele nevazute dupa gen
+     */
+    public List<Show> searchList(final List<Show> shows) {
 
         List<Show> searchList = new ArrayList<>();
         for (Show show : shows) {
@@ -171,27 +201,21 @@ public final class User {
         return searchList;
     }
 
-    public void addvideoFavorite(List<Show> shows) {
+    /**
+     * Adauga un video la favourite
+     */
+    public void addvideoFavorite(final List<Show> shows) {
         // pentru toate filmele favorite ale unui user
         // le caut in lista de show-uri si le maresc
         // numarul total de fav aparitii
-        for(String favorite : getFavoriteMovies()) {
-            for(Show show : shows) {
-                if(show.getTitle().equals(favorite)) {
+        for (String favorite : getFavoriteMovies()) {
+            for (Show show : shows) {
+                if (show.getTitle().equals(favorite)) {
                     int total = show.getTotalFav();
                     total++;
                     show.setTotalFav(total);
                 }
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return "UserInputData{" + "username='"
-                + username + '\'' + ", subscriptionType='"
-                + subscriptionType + '\'' + ", history="
-                + history + ", favoriteMovies="
-                + favoriteMovies + '}';
     }
 }

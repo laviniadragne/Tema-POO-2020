@@ -4,43 +4,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsersList {
-    private List<User> UsersList;
+    private List<User> usersList;
 
-    public UsersList(List<User> usersList) {
-        UsersList = usersList;
+    public UsersList(final List<User> inputusersList) {
+        usersList = inputusersList;
     }
 
+    /**
+     * Intoarce lista de useri
+     */
     public List<User> getUsersList() {
-        return UsersList;
+        return usersList;
     }
 
-    public void setUsersList(List<User> usersList) {
-        UsersList = usersList;
+    /**
+     * Seteaza lista de useri
+     */
+    public void setUsersList(final List<User> inputusersList) {
+        usersList = inputusersList;
     }
 
-    /* Cauta in lista un user cu un nume dat si il
-        returneaza
+    /**
+     * Cauta in lista un user cu un nume dat si il
+     * returneaza
     */
-    public User getUser(String name) {
-        for (User user : UsersList) {
-            if(user.getUsername().equals(name)) {
+    public User getUser(final String name) {
+        for (User user : usersList) {
+            if (user.getUsername().equals(name)) {
                 return user;
             }
         }
         return null;
     }
 
-    // calculeaza numarul total de aparitii favorite
-    // ale tuturor filmelor de la toti userii
-    public void addlistFav(List<Show> shows) {
+    /**
+     *  Calculeaza numarul total de aparitii favorite
+     * ale tuturor filmelor de la toti userii
+     */
+    public void addlistFav(final List<Show> shows) {
         for (User user : getUsersList()) {
             user.addvideoFavorite(shows);
         }
     }
 
-    public void ratingsSort(String criteria) {
+    /**
+     * Sorteaza userii pe baza rating-ului
+     */
+    public void ratingsSort(final String criteria) {
         if (criteria.equals("asc")) {
-            UsersList.sort((u1, u2) -> {
+            usersList.sort((u1, u2) -> {
                 if (!u1.getNumberRatings().equals(u2.getNumberRatings())) {
                     return Double.compare(u1.getNumberRatings(), u2.getNumberRatings());
                 }
@@ -49,7 +61,7 @@ public class UsersList {
 
         }
         if (criteria.equals("desc")) {
-            UsersList.sort((u1, u2) -> {
+            usersList.sort((u1, u2) -> {
                 if (!u1.getNumberRatings().equals(u2.getNumberRatings())) {
                     return Double.compare(u2.getNumberRatings(), u1.getNumberRatings());
                 }
@@ -58,14 +70,17 @@ public class UsersList {
 
         }
     }
-    // scrie intr-un string pe primele n filme in functie de favorite
-    public List<String> writeRating (int n) {
+
+    /**
+     * Scrie intr-un string primele n filme in functie de favorite
+     */
+    public List<String> writeRating(final int n) {
         List<String> listWrite = new ArrayList<>();
         int i = 0;
         int cnt = 0;
-        while(cnt < UsersList.size() && i < n) {
-            if (UsersList.get(cnt).getNumberRatings() != 0) {
-                    listWrite.add(UsersList.get(cnt).getUsername());
+        while (cnt < usersList.size() && i < n) {
+            if (usersList.get(cnt).getNumberRatings() != 0) {
+                    listWrite.add(usersList.get(cnt).getUsername());
                     i++;
             }
             cnt++;

@@ -80,7 +80,7 @@ public final class Actor {
         return serials;
     }
 
-    public void setSerials(ArrayList<String> serials) {
+    public void setSerials(final ArrayList<String> serials) {
         this.serials = serials;
     }
 
@@ -88,7 +88,7 @@ public final class Actor {
         return movies;
     }
 
-    public void setMovies(ArrayList<String> movies) {
+    public void setMovies(final ArrayList<String> movies) {
         this.movies = movies;
     }
 
@@ -96,7 +96,7 @@ public final class Actor {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(final double rating) {
         this.rating = rating;
     }
 
@@ -104,12 +104,15 @@ public final class Actor {
         return numberAwards;
     }
 
-    public void calculateRating(List<Movie> myMovies, List<Serial> mySerials){
+    /**
+     * Calculeaza rating-urile pentru listele de filme si seriale
+     */
+    public void calculateRating(final List<Movie> myMovies, final List<Serial> mySerials) {
 
         double sumMovies = 0;
         int nrMovies = 0;
-        for(String movie : movies) {
-            for(Movie myMovie : myMovies) {
+        for (String movie : movies) {
+            for (Movie myMovie : myMovies) {
                 if (myMovie.getTitle().equals(movie)) {
                     double ratingMovie = myMovie.sumRatings();
                     if (ratingMovie != 0) {
@@ -119,8 +122,6 @@ public final class Actor {
                 }
             }
         }
-
-
         double sumSerial = 0;
         int nrSerial = 0;
         for (String serial : serials) {
@@ -128,47 +129,53 @@ public final class Actor {
                 if (mySerial.getTitle().equals(serial)) {
                     // pentru fiecare sezon voi avea un hashmap - serialMap
                     double ratingSerial = mySerial.sumRatings();
-                    if(ratingSerial != 0) {
+                    if (ratingSerial != 0) {
                         sumSerial += ratingSerial;
                         nrSerial++;
                     }
                 }
             }
         }
-
         if (nrMovies + nrSerial != 0) {
             this.rating = (sumMovies + sumSerial) / (nrMovies + nrSerial);
         }
     }
 
-
-    // sortez filmele si serialele pe liste separate
-    public void filterShow(ArrayList<String> filmography, List<MovieInputData> moviesInput, List<SerialInputData> serialsInput) {
-        for (String videos : filmography) {
-            for(MovieInputData inputM : moviesInput)
+    /** Sortez filmele si serialele in liste separate
+     */
+    public void filterShow(final ArrayList<String> inputFilmography,
+                           final List<MovieInputData> moviesInput,
+                           final List<SerialInputData> serialsInput) {
+        for (String videos : inputFilmography) {
+            for (MovieInputData inputM : moviesInput) {
                 if (inputM.getTitle().equals(videos)) {
                     this.movies.add(videos);
                     break;
+                }
             }
-            for(SerialInputData inputS : serialsInput)
+            for (SerialInputData inputS : serialsInput) {
                 if (inputS.getTitle().equals(videos)) {
                     this.serials.add(videos);
                     break;
                 }
+            }
         }
     }
 
-    public String filterDescription(List<List<String>> filters) {
-
+    /** Intoarce numele actorilor cu cuvintele din filtre
+     * prezente in descrierea lor
+     */
+    public String filterDescription(final List<List<String>> filters) {
         int found = 1;
         // caut in lista de cuvinte
-        List <String> filter = filters.get(2);
+        List<String> filter = filters.get(2);
         // caut in lista de liste fiecare cuvant
             if (filter != null) {
                 for (String word : filter) {
                     // daca nu gasesc un cuvant dau break;
                     if (word != null) {
-                       if (!Pattern.compile(("[ -?!'.,(]" + word + "[ ?!-'.,)]"), Pattern.CASE_INSENSITIVE).matcher(getCareerDescription()).find()) {
+                       if (!Pattern.compile(("[ -?!'.,(]" + word + "[ ?!-'.,)]"),
+                               Pattern.CASE_INSENSITIVE).matcher(getCareerDescription()).find()) {
                            found = 0;
                            break;
                         }
@@ -182,14 +189,15 @@ public final class Actor {
         return null;
     }
 
-    // metoda calculeaza numarul total de premii din cele de la input
-    // primite de un actor si returneaza 0 in cazul in care
-    // actorul nu are toate premiile
-    public int awards (List<String> awards) {
-        int noAwards = awards.size();
+    /** Metoda calculeaza numarul total de premii din cele de la input
+        primite de un actor si returneaza 0 in cazul in care
+        actorul nu are toate premiile
+     */
+    public int awards(final List<String> inputAwards) {
+        int noAwards = inputAwards.size();
         // parcurg map-ul de ActorAwards
-        for (Map.Entry<ActorsAwards,Integer> entry : getAwards().entrySet()) {
-            for (String award : awards) {
+        for (Map.Entry<ActorsAwards, Integer> entry : getAwards().entrySet()) {
+            for (String award : inputAwards) {
                 // am gasit unul din premiile din lista actorului in lista
                 // de input
                 if (entry.getKey().toString().equals(award)) {
@@ -197,21 +205,20 @@ public final class Actor {
                 }
             }
         }
-
         // am gasit toate premiile
         if (noAwards == 0) {
             numberAwards = totalAwards();
             return  numberAwards;
-        }
-        else {
+        } else {
             return 0;
         }
     }
 
-    // calculeaza numarul total de premii ale unui actor
-    public int totalAwards () {
+    /** Calculeaza numarul total de premii ale unui actor
+     */
+    public int totalAwards() {
         int total = 0;
-        for (Map.Entry<ActorsAwards,Integer> entry : this.getAwards().entrySet()) {
+        for (Map.Entry<ActorsAwards, Integer> entry : this.getAwards().entrySet()) {
             if (entry.getValue() != 0) {
                 total += entry.getValue();
             }

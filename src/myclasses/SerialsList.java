@@ -5,23 +5,35 @@ import java.util.List;
 
 public class SerialsList {
 
-    private List<Serial> SerialsList;
+    private List<Serial> serialsList;
 
-    public SerialsList(List<Serial> serialsList) {
-        SerialsList = serialsList;
+    /**
+     * Construieste lista cu seriale pe baza inputului
+     */
+    public SerialsList(final List<Serial> inputserialsList) {
+       this.serialsList = inputserialsList;
     }
 
+    /**
+     * Intoarce lista de seriale
+     */
     public List<Serial> getSerialsList() {
-        return SerialsList;
+        return serialsList;
     }
 
-    public void setSerialsList(List<Serial> serialsList) {
-        SerialsList = serialsList;
+    /**
+     * Seteaza lista de seriale
+     */
+    public void setSerialsList(final List<Serial> inputserialsList) {
+        this.serialsList = inputserialsList;
     }
 
-    public void ratingsort(String criteria) {
+    /**
+     * Sorteaza serialele dupa rating si nume
+     */
+    public void ratingsort(final String criteria) {
         if (criteria.equals("asc")) {
-            SerialsList.sort((m1, m2) -> {
+            serialsList.sort((m1, m2) -> {
                 if (m1.sumRatings() != m2.sumRatings()) {
                     return Double.compare(m1.sumRatings(), m2.sumRatings());
                 }
@@ -30,7 +42,7 @@ public class SerialsList {
 
         }
         if (criteria.equals("desc")) {
-            SerialsList.sort((m1, m2) -> {
+            serialsList.sort((m1, m2) -> {
                 if (m1.sumRatings() != m2.sumRatings()) {
                     return Double.compare(m2.sumRatings(), m1.sumRatings());
                 }
@@ -38,29 +50,37 @@ public class SerialsList {
             });
         }
     }
-    // compar dupa numarul de aparitii in lista de favorite
-    public void favoritesort(UsersList myUsers, String criteria) {
+
+    /**
+     * Sortez dupa numarul de aparitii in lista de favorite si nume
+     */
+    public void favoritesort(final UsersList myUsers, final String criteria) {
         if (criteria.equals("asc")) {
-            SerialsList.sort((m1, m2) -> {
+            serialsList.sort((m1, m2) -> {
                 if (m1.aparitionFavorite(myUsers) != m2.aparitionFavorite(myUsers)) {
-                    return Double.compare(m1.aparitionFavorite(myUsers), m2.aparitionFavorite(myUsers));
+                    return Double.compare(m1.aparitionFavorite(myUsers),
+                                        m2.aparitionFavorite(myUsers));
                 }
                 return m1.getTitle().compareTo(m2.getTitle());
             });
         }
         if (criteria.equals("desc")) {
-            SerialsList.sort((m1, m2) -> {
+            serialsList.sort((m1, m2) -> {
                 if (m1.aparitionFavorite(myUsers) != m2.aparitionFavorite(myUsers)) {
-                    return Double.compare(m2.aparitionFavorite(myUsers), m1.aparitionFavorite(myUsers));
+                    return Double.compare(m2.aparitionFavorite(myUsers),
+                                        m1.aparitionFavorite(myUsers));
                 }
                 return m2.getTitle().compareTo(m1.getTitle());
             });
         }
     }
-    // compar dupa durata lor
-    public void durationSort(String criteria) {
+
+    /**
+     * Sorteaza dupa durata si nume
+     */
+    public void durationSort(final String criteria) {
         if (criteria.equals("asc")) {
-            SerialsList.sort((s1, s2) -> {
+            serialsList.sort((s1, s2) -> {
                 if (s1.sumDuration() != s2.sumDuration()) {
                     return Double.compare(s1.sumDuration(), s2.sumDuration());
                 }
@@ -68,7 +88,7 @@ public class SerialsList {
             });
         }
         if (criteria.equals("desc")) {
-            SerialsList.sort((s1, s2) -> {
+            serialsList.sort((s1, s2) -> {
                 if (s1.sumDuration() != s2.sumDuration()) {
                     return Double.compare(s2.sumDuration(), s1.sumDuration());
                 }
@@ -76,37 +96,46 @@ public class SerialsList {
             });
         }
     }
-    // sorteaza dupa nr de vizualizari
-    public void viewsSort(String criteria, UsersList myUsersClass) {
+
+    /**
+     * Sorteaza dupa nr de vizualizari si nume
+     */
+    public void viewsSort(final String criteria, final UsersList myUsersClass) {
         if (criteria.equals("asc")) {
-            SerialsList.sort((s1, s2) -> {
+            serialsList.sort((s1, s2) -> {
                 if (s1.sumViews(myUsersClass) != s2.sumViews(myUsersClass)) {
-                    return Double.compare(s1.sumViews(myUsersClass), s2.sumViews(myUsersClass));
+                    return Double.compare(s1.sumViews(myUsersClass),
+                                        s2.sumViews(myUsersClass));
                 }
                 return s1.getTitle().compareTo(s2.getTitle());
             });
 
         }
         if (criteria.equals("desc")) {
-            SerialsList.sort((s1, s2) -> {
+            serialsList.sort((s1, s2) -> {
                 if (s1.sumViews(myUsersClass) != s2.sumViews(myUsersClass)) {
-                    return Double.compare(s2.sumViews(myUsersClass), s1.sumViews(myUsersClass));
+                    return Double.compare(s2.sumViews(myUsersClass),
+                                            s1.sumViews(myUsersClass));
                 }
                 return s2.getTitle().compareTo(s1.getTitle());
             });
 
         }
     }
-    // scrie intr-un string pe primele n filme in functie de favorite
-    public List<String> writeFavAparition (int n, List<List<String>> filters, UsersList myUsers ) {
+
+    /**
+     * Scrie intr-un string pe primele n filme in functie de favorite
+     */
+    public List<String> writeFavAparition(final int n, final List<List<String>> filters,
+                                          final UsersList myUsers) {
         List<String> listWrite = new ArrayList<>();
         int i = 0;
         int cnt = 0;
-        while(cnt < SerialsList.size() && i < n) {
-            if (SerialsList.get(cnt).aparitionFavorite(myUsers) != 0) {
+        while (cnt < serialsList.size() && i < n) {
+            if (serialsList.get(cnt).aparitionFavorite(myUsers) != 0) {
                 // daca are filtrele precizate
-                if (SerialsList.get(cnt).filtersVideos(filters)) {
-                    listWrite.add(SerialsList.get(cnt).getTitle());
+                if (serialsList.get(cnt).filtersVideos(filters)) {
+                    listWrite.add(serialsList.get(cnt).getTitle());
                     i++;
                 }
             }
@@ -114,17 +143,20 @@ public class SerialsList {
         }
         return listWrite;
     }
-    // scrie intr-un string pe primele N filme cu rating-ul
-    // diferit de 0
-    public List<String> writeSortedSerials (int n, List<List<String>> filters) {
+
+    /**
+     * Scrie intr-un string pe primele N filme cu rating-ul
+        diferit de 0
+     */
+    public List<String> writeSortedSerials(final int n, final List<List<String>> filters) {
         List<String> listWrite = new ArrayList<>();
         int i = 0;
         int cnt = 0;
-        while(cnt < SerialsList.size() && i < n) {
-            if (SerialsList.get(cnt).sumRatings() != 0) {
+        while (cnt < serialsList.size() && i < n) {
+            if (serialsList.get(cnt).sumRatings() != 0) {
                 // daca are filtrele precizate
-                if (SerialsList.get(cnt).filtersVideos(filters)) {
-                    listWrite.add(SerialsList.get(cnt).getTitle());
+                if (serialsList.get(cnt).filtersVideos(filters)) {
+                    listWrite.add(serialsList.get(cnt).getTitle());
                     i++;
                 }
             }
@@ -132,16 +164,19 @@ public class SerialsList {
         }
         return listWrite;
     }
-    // scrie intr-un string pe primele N seriale sortate dupa durata
-    public List<String> writeLongestSerials (int n, List<List<String>> filters) {
+
+    /**
+     * Scrie intr-un string primele N seriale sortate dupa durata
+     */
+    public List<String> writeLongestSerials(final int n, final List<List<String>> filters) {
         List<String> listWrite = new ArrayList<>();
         int i = 0;
         int cnt = 0;
-        while(cnt < SerialsList.size() && i < n) {
-            if (SerialsList.get(cnt).sumDuration() != 0) {
+        while (cnt < serialsList.size() && i < n) {
+            if (serialsList.get(cnt).sumDuration() != 0) {
                 // daca are filtrele precizate
-                if (SerialsList.get(cnt).filtersVideos(filters)) {
-                    listWrite.add(SerialsList.get(cnt).getTitle());
+                if (serialsList.get(cnt).filtersVideos(filters)) {
+                    listWrite.add(serialsList.get(cnt).getTitle());
                     i++;
                 }
             }
@@ -149,16 +184,20 @@ public class SerialsList {
         }
         return listWrite;
     }
-    // scrie intr-un string pe primele n filme in functie de favorite
-    public List<String> writeMostView (int n, List<List<String>> filters, UsersList myUsers) {
+
+    /**
+     * Scrie intr-un string primele n filme in functie de favorite
+     */
+    public List<String> writeMostView(final int n, final List<List<String>> filters,
+                                      final UsersList myUsers) {
         List<String> listWrite = new ArrayList<>();
         int i = 0;
         int cnt = 0;
-        while(cnt < SerialsList.size() && i < n) {
-            if (SerialsList.get(cnt).sumViews(myUsers) != 0) {
+        while (cnt < serialsList.size() && i < n) {
+            if (serialsList.get(cnt).sumViews(myUsers) != 0) {
                 // daca are filtrele precizate
-                if (SerialsList.get(cnt).filtersVideos(filters)) {
-                    listWrite.add(SerialsList.get(cnt).getTitle());
+                if (serialsList.get(cnt).filtersVideos(filters)) {
+                    listWrite.add(serialsList.get(cnt).getTitle());
                     i++;
                 }
             }

@@ -3,8 +3,19 @@ package main;
 import checker.Checkstyle;
 import checker.Checker;
 import common.Constants;
-import fileio.*;
-import myclasses.*;
+import fileio.ActionInputData;
+import fileio.Input;
+import fileio.InputLoader;
+import fileio.Writer;
+import myclasses.ActorsList;
+import myclasses.Assign;
+import myclasses.Commands;
+import myclasses.MoviesList;
+import myclasses.Queries;
+import myclasses.Recommendations;
+import myclasses.SerialsList;
+import myclasses.ShowsList;
+import myclasses.UsersList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,7 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Objects;
 
 /**
  * The entry point to this homework. It runs the checker that tests your implentation.
@@ -76,7 +87,8 @@ public final class Main {
         UsersList myUsersClass = Assign.assignUsers(input);
         ActorsList myActorsClass = Assign.assignActors(input);
         MoviesList myMoviesClass = Assign.assignMovies(input);
-        SerialsList mySerialsClass = Assign.assignSerials(input, myMoviesClass.getMoviesList().size());
+        SerialsList mySerialsClass = Assign.assignSerials(input,
+                                                myMoviesClass.getMoviesList().size());
         ShowsList myShowsClass = Assign.assignShows(myMoviesClass, mySerialsClass);
 
         for (ActionInputData action : input.getCommands()) {
@@ -99,7 +111,7 @@ public final class Main {
                     }
 
                     if (action.getType().equals("best_unseen")) {
-                      message = Recommendations.best_unseen(myUsersClass, myShowsClass, action);
+                      message = Recommendations.bestunseen(myUsersClass, myShowsClass, action);
                     }
                     if (action.getType().equals("search")) {
                        message = Recommendations.search(myUsersClass, myShowsClass, action);
@@ -122,7 +134,8 @@ public final class Main {
                                 message = Queries.awards(myActorsClass, action);
                             }
                             if (action.getCriteria().equals("average")) {
-                                message = Queries.average(myActorsClass, mySerialsClass, myMoviesClass, action);
+                                message = Queries.average(myActorsClass, mySerialsClass,
+                                                            myMoviesClass, action);
                         }
                     }
                     if (action.getObjectType().equals("movies")) {
@@ -136,7 +149,7 @@ public final class Main {
                             message = Queries.moviesLongest(myMoviesClass, action);
                         }
                         if (action.getCriteria().equals("most_viewed")) {
-                            message = Queries.moviesmostViewd(myUsersClass,myMoviesClass, action);
+                            message = Queries.moviesmostViewd(myUsersClass, myMoviesClass, action);
                         }
                     }
                     if (action.getObjectType().equals("shows")) {
@@ -144,13 +157,15 @@ public final class Main {
                             message = Queries.serialsRating(mySerialsClass, action);
                         }
                         if (action.getCriteria().equals("favorite")) {
-                            message = Queries.serialsFavourite(myUsersClass, mySerialsClass, action);
+                            message = Queries.serialsFavourite(myUsersClass,
+                                                            mySerialsClass, action);
                         }
                         if (action.getCriteria().equals("longest")) {
                             message = Queries.serialsLongest(mySerialsClass, action);
                         }
                         if (action.getCriteria().equals("most_viewed")) {
-                            message = Queries.serialsmostViewd(myUsersClass, mySerialsClass, action);
+                            message = Queries.serialsmostViewd(myUsersClass,
+                                                                mySerialsClass, action);
                         }
                     }
                     if (action.getObjectType().equals("users")) {

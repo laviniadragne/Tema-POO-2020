@@ -5,9 +5,16 @@ import fileio.ActionInputData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recommendations {
+public final class Recommendations {
 
-    public static String standard(UsersList myUsersClass ,ShowsList myShowsClass, ActionInputData action) {
+    private Recommendations() {
+    }
+
+    /**
+     * Intoarce primul video nevăzut de utilizator din baza de date
+     */
+    public static String standard(final UsersList myUsersClass, final ShowsList myShowsClass,
+                                  final ActionInputData action) {
         String message = "";
         String username = action.getUsername();
         User user = myUsersClass.getUser(username);
@@ -23,7 +30,12 @@ public class Recommendations {
         return message;
     }
 
-    public static String best_unseen(UsersList myUsersClass, ShowsList myShowsClass, ActionInputData action) {
+    /**
+     * Intoarce cel mai bun video nevizualizat de acel utilizator
+     */
+    public static String bestunseen(final UsersList myUsersClass,
+                                     final ShowsList myShowsClass,
+                                     final ActionInputData action) {
         String message = "";
         myShowsClass.bestunseenSort();
         User user = myUsersClass.getUser(action.getUsername());
@@ -36,8 +48,14 @@ public class Recommendations {
         }
         return message;
     }
-    
-    public static String search(UsersList myUsersClass, ShowsList myShowsClass, ActionInputData action) {
+
+    /**
+     * Intoarce toate videoclipurile nevăzute de user dintr-un anumit gen,
+     * dat ca filtru în input
+     */
+    public static String search(final UsersList myUsersClass,
+                                final ShowsList myShowsClass,
+                                final ActionInputData action) {
         String message = "";
         // verific daca userul e premium
         User premiumUser = myUsersClass.getUser(action.getUsername());
@@ -64,7 +82,12 @@ public class Recommendations {
         return message;
     }
 
-    public static String favorite(UsersList myUsersClass, ShowsList myShowsClass, ActionInputData action) {
+    /**
+     * Intoarce videoclipul care e cel mai des intalnit in lista de favorit
+     */
+    public static String favorite(final UsersList myUsersClass,
+                                  final ShowsList myShowsClass,
+                                  final ActionInputData action) {
         String message = "";
         // verific daca userul e premium
         User premiumUser = myUsersClass.getUser(action.getUsername());
@@ -95,13 +118,18 @@ public class Recommendations {
         return message;
     }
 
-    public static String popular(UsersList myUsersClass, ShowsList myShowsClass, ActionInputData action) {
+    /**
+     * Intoarce primul video nevizualizat din cel mai popular gen
+     */
+    public static String popular(final UsersList myUsersClass,
+                                 final ShowsList myShowsClass,
+                                 final ActionInputData action) {
         String message = "";
         // verific daca userul e premium
         User premiumUser = myUsersClass.getUser(action.getUsername());
         if (premiumUser.getSubscriptionType().equals("PREMIUM")) {
 
-            List<myGenre> listGenres = new ArrayList<>();
+            List<MyGenre> listGenres = new ArrayList<>();
             GenresList myGenresClass = new GenresList(listGenres);
             // calculez pentru fiecare gen in parte numarul de views
             myGenresClass.calculatePopular(myShowsClass, myUsersClass);

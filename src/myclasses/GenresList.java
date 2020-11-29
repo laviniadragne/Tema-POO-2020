@@ -4,61 +4,65 @@ import java.util.List;
 
 public class GenresList {
 
-    private final List<myGenre> GenresList;
+    private final List<MyGenre> genresList;
 
-    public GenresList(List<myGenre> GenresList) {
-        this.GenresList = GenresList;
-        myGenre newGenre = new myGenre("Action");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Adventure");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Drama");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Comedy");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Crime");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Romance");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("War");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("History");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Thriller");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Mystery");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Family");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Horror");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Fantasy");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Science Fiction");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Action & Adventure");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Sci-Fi & Fantasy");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Animation");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Kids");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("Western");
-        GenresList.add(newGenre);
-        newGenre = new myGenre("TV Movie");
-        GenresList.add(newGenre);
+    public GenresList(final List<MyGenre> mygenresList) {
+        this.genresList = mygenresList;
+        MyGenre newGenre = new MyGenre("Action");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Adventure");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Drama");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Comedy");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Crime");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Romance");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("War");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("History");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Thriller");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Mystery");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Family");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Horror");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Fantasy");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Science Fiction");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Action & Adventure");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Sci-Fi & Fantasy");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Animation");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Kids");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("Western");
+        genresList.add(newGenre);
+        newGenre = new MyGenre("TV Movie");
+        genresList.add(newGenre);
     }
 
-    public List<myGenre> getGenresList() {
-        return GenresList;
+    /**
+     * Intoarce lista cu toate genurile
+     */
+    public List<MyGenre> getGenresList() {
+        return genresList;
     }
 
-    // metoda cauta fiecare gen in baza de date de view-urilor ale show-urilor
-    // si calculeaza numarul total de view-uri pentru acel gen
-    public void calculatePopular(ShowsList myShows, UsersList myUsers) {
+    /** metoda cauta fiecare gen in baza de date de view-urilor ale show-urilor
+       si calculeaza numarul total de view-uri pentru acel gen
+     */
+    public void calculatePopular(final ShowsList myShows, final UsersList myUsers) {
         // parcurg toate genurile
-        for (myGenre genre : GenresList) {
+        for (MyGenre genre : genresList) {
             // parcurg toate genurile fiecarui show
             for (Show show : myShows.getShowsList()) {
                 // caut in lista de genuri ale show-ului
@@ -77,16 +81,18 @@ public class GenresList {
         }
     }
 
-    // sorteaza dupa numarul de view-uri o lista de genuri
+    /** sorteaza dupa numarul de view-uri o lista de genuri
+     */
     public void searchPopularSort() {
-        GenresList.sort((g1, g2) -> Double.compare(g2.getNumberViews(), g1.getNumberViews()));
+        genresList.sort((g1, g2) -> Double.compare(g2.getNumberViews(), g1.getNumberViews()));
     }
 
-    // returneaza primul show nevazut din cel mai popular gen
-    // ale unui user dat ca si parametru
-    public String popularShow(ShowsList myShows, User user) {
+    /** returneaza primul show nevazut din cel mai popular gen
+        ale unui user dat ca si parametru
+     */
+    public String popularShow(final ShowsList myShows, final User user) {
         // pentru fiecare gen caut toate show-urile cu acel gen
-        for (myGenre genre : getGenresList()) {
+        for (MyGenre genre : getGenresList()) {
             for (Show show : myShows.getShowsList()) {
                 // show-ul e din acel gen
                 if (show.presentGenre(genre.getNameGenre())) {

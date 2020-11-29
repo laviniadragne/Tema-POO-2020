@@ -2,9 +2,16 @@ package myclasses;
 
 import fileio.ActionInputData;
 
-public class Commands {
+public final class Commands {
 
-    public static String favourite(UsersList myUsersClass, ActionInputData action) {
+    private Commands() {
+    }
+
+    /**
+     * Adaugă un video în lista de favorite videos ale acelui user,
+     * dacă a fost deja vizionat de user-ul respectiv.
+     */
+    public static String favourite(final UsersList myUsersClass, final ActionInputData action) {
         String message;
         // caut in userii mei numele celui dat
         User user = myUsersClass.getUser(action.getUsername());
@@ -13,7 +20,10 @@ public class Commands {
         return message;
     }
 
-    public static String view(UsersList myUsersClass, ActionInputData action) {
+    /**
+     * Vizualizează un video prin marcarea lui ca văzut
+     */
+    public static String view(final UsersList myUsersClass, final ActionInputData action) {
         String message;
         // caut in userii mei numele celui dat
         User user = myUsersClass.getUser(action.getUsername());
@@ -22,8 +32,11 @@ public class Commands {
         return message;
     }
 
-    public static String rating(UsersList myUsersClass, MoviesList myMoviesClass, SerialsList mySerialsClass,
-                                ActionInputData action) {
+    /**
+     * Oferă rating unui video care este deja văzut
+     */
+    public static String rating(final UsersList myUsersClass, final MoviesList myMoviesClass,
+                                final SerialsList mySerialsClass, final ActionInputData action) {
         String message;
         // caut in userii mei numele celui dat
         User user = myUsersClass.getUser(action.getUsername());

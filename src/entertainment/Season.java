@@ -26,8 +26,10 @@ public final class Season {
      */
     private List<Double> ratings;
 
-    // rating-urile date de fiecare user
-    private Map<User, Double> ratingsUser;
+    /**
+     * Rating-urile date de fiecare user
+     */
+    private final Map<User, Double> ratingsUser;
 
 
     public Season(final int currentSeason, final int duration) {
@@ -58,11 +60,9 @@ public final class Season {
         return ratingsUser;
     }
 
-    public void setRatingsUser(Map<User, Double> ratingsUser) {
-        this.ratingsUser = ratingsUser;
-    }
-
-    // calculeaza rating-ul unui sezon
+    /**
+     * Calculeaza rating-ul unui sezon
+     */
     public double sumRatings() {
         double sum = 0;
         for (double f : ratingsUser.values()) {
