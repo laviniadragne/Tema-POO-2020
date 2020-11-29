@@ -80,7 +80,7 @@ public abstract class Show {
     public abstract double sumRatings();
 
     /**
-     * Verifica daca un movie contine field-urile date in input
+     * Verifica daca un show contine field-urile date in input
      */
     public boolean filtersVideos(final List<List<String>> filters) {
         List<String> years = filters.get(0);

@@ -1,5 +1,4 @@
 Starting audit...
-[ERROR] /home/lavinia/Desktop/POO/Tema1/tema1/Tema-POO-2020/./src/package-info.java:1: File does not end with a newline. [NewlineAtEndOfFile]
 [ERROR] /home/lavinia/Desktop/POO/Tema1/tema1/Tema-POO-2020/./src/myclasses/Queries.java:19:56: '3' is a magic number. [MagicNumber]
 Audit done.
-Checkstyle ends with 2 errors.
+Checkstyle ends with 1 errors.

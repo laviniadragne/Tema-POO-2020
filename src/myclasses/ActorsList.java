@@ -106,7 +106,7 @@ public class ActorsList {
     }
 
     /**
-     * Scrie intr-un string primii N actori, sortati dupa rating
+     * Scrie intr-un string numele primilor N actori, sortati dupa rating
      */
     public List<String> writeSortedNName(final List<Actor> actor, final ActionInputData action) {
         // adaug actorii cu rating-ul diferit de 0

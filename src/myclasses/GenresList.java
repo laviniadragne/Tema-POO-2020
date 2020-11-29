@@ -58,7 +58,7 @@ public class GenresList {
     }
 
     /**
-     * Metoda cauta fiecare gen in baza de date de view-uri ale show-urilor
+     * Metoda cauta fiecare gen in baza de date
      * si calculeaza numarul total de view-uri pentru acel gen
      */
     public void calculatePopular(final ShowsList myShows, final UsersList myUsers) {
