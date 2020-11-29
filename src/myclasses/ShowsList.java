@@ -27,7 +27,7 @@ public class ShowsList {
     }
 
     /**
-     * Creeaza o lista cu numele shor-urilor
+     * Creeaza o lista cu numele show-urilor
      */
     public List<String> getshowsName() {
         List<String> nameList = new ArrayList<>();

@@ -86,7 +86,8 @@ public class MoviesList {
         }
     }
 
-    /** compar dupa durata lor
+    /**
+     * Sortare dupa durata lor si nume
      */
     public void durationSort(final String criteria) {
         if (criteria.equals("asc")) {
@@ -131,8 +132,9 @@ public class MoviesList {
         }
     }
 
-    /** Scrie intr-un string pe primele N filme cu rating-ul
-        diferit de 0
+    /**
+     * Scrie intr-un string primele N filme cu rating-ul
+     * diferit de 0
      */
     public List<String> writeSortedMovies(final int n, final List<List<String>> filters) {
         List<String> listWrite = new ArrayList<>();
@@ -151,8 +153,9 @@ public class MoviesList {
         return listWrite;
     }
 
-    /** Scrie intr-un string pe primele n filme in functie de favorite
-      */
+    /**
+     * Scrie intr-un string primele n filme in functie de favorite
+     */
     public List<String> writeFavAparition(final int n, final List<List<String>> filters,
                                           final UsersList myUsers) {
         List<String> listWrite = new ArrayList<>();
@@ -171,7 +174,8 @@ public class MoviesList {
         return listWrite;
     }
 
-    /** Scrie intr-un string pe primele N filme cu rating-ul
+    /**
+     * Scrie intr-un string primele N filme cu rating-ul
         diferit de 0
      */
     public List<String> writeLongestMovies(final int n, final List<List<String>> filters) {
@@ -191,8 +195,9 @@ public class MoviesList {
         return listWrite;
     }
 
-    /** scrie intr-un string pe primele n filme in functie de favorite
-     * */
+    /**
+     * Scrie intr-un string primele n filme in functie de favorite
+     */
     public List<String> writeMostView(final int n, final List<List<String>> filters,
                                       final UsersList myUsers) {
         List<String> listWrite = new ArrayList<>();

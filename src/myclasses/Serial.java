@@ -38,7 +38,7 @@ public class Serial extends Show {
     }
 
     /**
-    Calculeaza rating-ul unui serial
+     * Calculeaza rating-ul unui serial
      */
     public double sumRatings() {
         double sum = 0;

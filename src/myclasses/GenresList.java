@@ -57,8 +57,9 @@ public class GenresList {
         return genresList;
     }
 
-    /** metoda cauta fiecare gen in baza de date de view-urilor ale show-urilor
-       si calculeaza numarul total de view-uri pentru acel gen
+    /**
+     * Metoda cauta fiecare gen in baza de date de view-uri ale show-urilor
+     * si calculeaza numarul total de view-uri pentru acel gen
      */
     public void calculatePopular(final ShowsList myShows, final UsersList myUsers) {
         // parcurg toate genurile
@@ -81,13 +82,15 @@ public class GenresList {
         }
     }
 
-    /** sorteaza dupa numarul de view-uri o lista de genuri
+    /**
+     * Sorteaza dupa numarul de view-uri o lista de genuri
      */
     public void searchPopularSort() {
         genresList.sort((g1, g2) -> Double.compare(g2.getNumberViews(), g1.getNumberViews()));
     }
 
-    /** returneaza primul show nevazut din cel mai popular gen
+    /**
+     * Returneaza primul show nevazut din cel mai popular gen
         ale unui user dat ca si parametru
      */
     public String popularShow(final ShowsList myShows, final User user) {

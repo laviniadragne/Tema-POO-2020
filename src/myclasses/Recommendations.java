@@ -83,7 +83,7 @@ public final class Recommendations {
     }
 
     /**
-     * Intoarce videoclipul care e cel mai des intalnit in lista de favorit
+     * Intoarce videoclipul care e cel mai des intalnit in lista de favorite
      */
     public static String favorite(final UsersList myUsersClass,
                                   final ShowsList myShowsClass,
@@ -149,7 +149,5 @@ public final class Recommendations {
             message = message + "PopularRecommendation cannot be applied!";
         }
         return message;
-
     }
-
 }

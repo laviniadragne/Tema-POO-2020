@@ -28,7 +28,8 @@ public class ActorsList {
         this.actorsList = myactorsList;
     }
 
-    /** sorteaza dupa numarul de premii, dupa ordinea din input
+    /**
+     * Sorteaza dupa numarul de premii, dupa ordinea din input
      */
     public void awardsSort(final String criteria, final List<Actor> actors) {
         if (criteria.equals("asc")) {
@@ -51,7 +52,8 @@ public class ActorsList {
         }
     }
 
-    /** sorteaza dupa ordinea alfabetica a numelor
+    /**
+     * Sorteaza dupa ordinea alfabetica a numelor
      * @param criteria criteriul sortarii
      * @param actors lista sortata
      */
@@ -66,7 +68,8 @@ public class ActorsList {
         }
     }
 
-    /** Sorteaza dupa rating si dupa nume
+    /**
+     * Sorteaza dupa rating si dupa nume
      */
     public void ratingSort(final String criteria, final List<Actor> actors) {
         if (criteria.equals("asc")) {
@@ -88,8 +91,9 @@ public class ActorsList {
         }
     }
 
-    /** Scrie intr-un string numele tuturor actorilor
-       cu premiile cerute
+    /**
+     * Scrie intr-un string numele tuturor actorilor
+     * cu premiile cerute
      */
     public List<String> writeSortedNames(final List<Actor> actor) {
         List<String> listWrite = new ArrayList<>();
@@ -101,7 +105,8 @@ public class ActorsList {
         return listWrite;
     }
 
-    /** Scrie intr-un string primii N actori, sortati dupa rating
+    /**
+     * Scrie intr-un string primii N actori, sortati dupa rating
      */
     public List<String> writeSortedNName(final List<Actor> actor, final ActionInputData action) {
         // adaug actorii cu rating-ul diferit de 0

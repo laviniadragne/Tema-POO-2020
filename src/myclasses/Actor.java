@@ -141,7 +141,8 @@ public final class Actor {
         }
     }
 
-    /** Sortez filmele si serialele in liste separate
+    /**
+     * Sortez filmele si serialele in liste separate
      */
     public void filterShow(final ArrayList<String> inputFilmography,
                            final List<MovieInputData> moviesInput,
@@ -162,7 +163,8 @@ public final class Actor {
         }
     }
 
-    /** Intoarce numele actorilor cu cuvintele din filtre
+    /**
+     * Intoarce numele actorilor cu cuvintele din filtre
      * prezente in descrierea lor
      */
     public String filterDescription(final List<List<String>> filters) {
@@ -189,9 +191,10 @@ public final class Actor {
         return null;
     }
 
-    /** Metoda calculeaza numarul total de premii din cele de la input
-        primite de un actor si returneaza 0 in cazul in care
-        actorul nu are toate premiile
+    /**
+     * Metoda calculeaza numarul total de premii din cele de la input
+     * primite de un actor si returneaza 0 in cazul in care
+     * actorul nu are toate premiile
      */
     public int awards(final List<String> inputAwards) {
         int noAwards = inputAwards.size();
@@ -214,7 +217,8 @@ public final class Actor {
         }
     }
 
-    /** Calculeaza numarul total de premii ale unui actor
+    /**
+     * Calculeaza numarul total de premii ale unui actor
      */
     public int totalAwards() {
         int total = 0;

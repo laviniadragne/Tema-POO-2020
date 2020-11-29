@@ -79,8 +79,9 @@ public abstract class Show {
      */
     public abstract double sumRatings();
 
-    /** verifica daca un movie contine field-urile
-     * */
+    /**
+     * Verifica daca un movie contine field-urile date in input
+     */
     public boolean filtersVideos(final List<List<String>> filters) {
         List<String> years = filters.get(0);
         // verific daca filmul are anul caracteristic
@@ -106,8 +107,9 @@ public abstract class Show {
         return years.get(0) == null && filters.get(1).get(0) == null;
     }
 
-    /** functia calculeaza numarul de aparitii ale show-ului
-        in lista de useri
+    /**
+     * Functia calculeaza numarul de aparitii ale show-ului
+     * in lista de useri
      */
     public int aparitionFavorite(final UsersList myUsers) {
         int aparitions = 0;
@@ -135,8 +137,9 @@ public abstract class Show {
         return sumViews;
     }
 
-    /** metoda intoarce daca show-ul are un gen dat ca si parametru
-     * */
+    /**
+     * Metoda intoarce daca show-ul are un gen dat ca si parametru
+     */
     public boolean presentGenre(final String name) {
         for (String nameGenre : getGenres()) {
             if (nameGenre.equals(name)) {
@@ -145,5 +148,4 @@ public abstract class Show {
         }
         return false;
     }
-
 }

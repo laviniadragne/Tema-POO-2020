@@ -27,7 +27,7 @@ public class UsersList {
     /**
      * Cauta in lista un user cu un nume dat si il
      * returneaza
-    */
+     */
     public User getUser(final String name) {
         for (User user : usersList) {
             if (user.getUsername().equals(name)) {
@@ -39,7 +39,7 @@ public class UsersList {
 
     /**
      *  Calculeaza numarul total de aparitii favorite
-     * ale tuturor filmelor de la toti userii
+     *  ale tuturor filmelor de la toti userii
      */
     public void addlistFav(final List<Show> shows) {
         for (User user : getUsersList()) {

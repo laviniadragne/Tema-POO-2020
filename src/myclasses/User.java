@@ -172,7 +172,7 @@ public class User {
     }
 
     /**
-     * Cauta in history ul user-ului filmele din lista
+     * Cauta in history-ul user-ului filmele din lista
      * si il intoarce pe primul nevazut, cel mai popular
      */
     public String unseen(final List<Show> shows) {
@@ -186,7 +186,7 @@ public class User {
     }
 
     /**
-     * Cauta in history ul user-ului filmele din lista
+     * Cauta in history-ul user-ului filmele din lista
      * si le intoarce pe cele nevazute dupa gen
      */
     public List<Show> searchList(final List<Show> shows) {

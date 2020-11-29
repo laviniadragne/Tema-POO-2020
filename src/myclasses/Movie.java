@@ -43,7 +43,8 @@ public class Movie extends Show {
         this.ratings = ratings;
     }
 
-    /** Metoda calculeaza rating-ul unui film
+    /**
+     * Metoda calculeaza rating-ul unui film
      */
     public double sumRatings() {
         double sum = 0;

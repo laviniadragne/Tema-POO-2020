@@ -124,7 +124,7 @@ public class SerialsList {
     }
 
     /**
-     * Scrie intr-un string pe primele n filme in functie de favorite
+     * Scrie intr-un string primele n filme in functie de favorite
      */
     public List<String> writeFavAparition(final int n, final List<List<String>> filters,
                                           final UsersList myUsers) {
@@ -145,7 +145,7 @@ public class SerialsList {
     }
 
     /**
-     * Scrie intr-un string pe primele N filme cu rating-ul
+     * Scrie intr-un string primele N filme cu rating-ul
         diferit de 0
      */
     public List<String> writeSortedSerials(final int n, final List<List<String>> filters) {
@@ -186,7 +186,7 @@ public class SerialsList {
     }
 
     /**
-     * Scrie intr-un string primele n filme in functie de favorite
+     * Scrie intr-un string primele N seriale in functie de favorite
      */
     public List<String> writeMostView(final int n, final List<List<String>> filters,
                                       final UsersList myUsers) {
