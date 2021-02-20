@@ -1,36 +1,103 @@
-Object Oriented Programming Course
-Homework - VideosDB
+Nume: Dragne Lavinia-Stefana
+Grupa: 324 CA
+Email: lavinia.dragne@stud.acs.upb.ro
 
-November 2020
-
-# Info
-https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/tema
-
-# About the code
-
-We provide the input tests, the logic that parses them and the checker that runs them.
-
-* test_db - contains the tests in JSON format
-* src
-   * checker - the checker's sources including the checkstyle necessary files, not to be modified
-   * fileio - classes for parsing the input files, not to be modified
-   * common, utils
-        * contain utility classes with constants and static methods
-        * you can add your own functionality in the existing classes or add new classes as well
-   * actor
-        * contains an enum for the types of awards an actor can have - do not modify it
-        * you can add here your actor related classes
-   * entertainment
-        * contains an enum for the supported video genres - do not modify it
-        * class for representing a Season of a tv show - do not modify it
-        * you can add here your entertainment related classes
+				    PROGRAMARE ORIENTATA PE OBIECT
+					Tema #1 - "VideosDB"
 
 
-# Testing
+	Continutul proiectului este urmatorul:
 
-The Main class runs the checker on your implementation. Add the entry point to your implementation in it.
+	-  folder-ul src cu pachetele și cu fișierele .java
+	-  folderul .git
+	-  acest fisier README.
 
-Run Main to test your implementation from the IDE or from command line.
+	Link pentru repo-ul de pe git:
+	https://github.com/laviniadragne/Tema-POO-2020
 
-Run the main method from Test class with the name of the input file from the command line and the result will be written
-to the out.txt file. Thus, you can compare this result with ref.
+	Prezentarea solutiei:
+	
+	* Clasele implementate de mine sunt grupate in pachetul "myclasses". 
+	* Pentru structura claselor de baza, si anume, Action, Actor, Movie, Serial, Show si User am
+folosit ca si schelet implementarile din clasele de input, folosite pentru parsarea datelor,
+acestora adaugandu-le functionalitati suplimentare, in functie de task.
+	* Am reorganizat bazele de date in liste de actori, filme, genuri, show-uri si seriale.
+	* Fiecarei liste i-am asociat metode specifice, grupandu-le in clase cu nume
+caracteristic (ex: ActorsList, MoviesList etc).
+	* Fiecarui tip de actiune i-am asociat o clasa de tip final (ex: Commands, Queries), in care
+am implementat metode statice, pentru rezolvarea fiecarei actiuni specifice (ex: comanda Favorite are
+asociata metoda statica favourite din clasa Commands, aceasta returnand mesajul specific, ce trebuie
+scris in fisierul JSON de iesire). 
+	* In clasa Main, in metoda action, verific ce tip de actiune primesc si in functie de
+aceasta, apelez metoda statica corespunzatoare, din clasele final.
+	* Clasa final Assign imi construieste propria mea baza de date, respectiv listele
+specifice fiecarei entitati, pe baza claselor de parsare de la input.
+
+	Comenzile:
+
+	* Fiecare metoda statica primeste listele cu datele ce ii sunt utile, din clasa Main si
+intoarce mesajul, ce trebuie scris in fisierul JSON. 
+	* Cum in datele de intrare, pentru fiecare entitate este specificat doar numele, fiecare
+clasa cu liste de entitati are o metoda de tip get* (ex: getUser), care intoarce obiectul (ex: de tip
+user etc), cu numele specificat la input. 
+	* De asemenea, fiecare user are o metoda de add* (addView, addFavourite, addRating), care
+adauga informatiile din comanda in baza de date.
+
+	Query-urile:
+
+	* Pentru fiecare actiune, ce necesita returnarea unei liste, imi creez o lista noua, in
+metoda, la care adaug doar obiectele ce intrunesc cerintele date. 
+	* Pentru a verifica daca un obiect trebuie sau nu adaugat, am cate o metoda de verificare a
+filtrelor, in fiecare clasa (ex: metoda filterDescription, din clasa Actor, care cauta, in
+descrierea unui actor, o lista de filters data ca si paramtru; metoda awards, care calculeaza numarul
+total de premii din cele de la input, primite de un actor). 
+	* Fiecare clasa cu o lista de entitati (ex: ActorsList) are cate o metoda pentru a sorta,
+dupa criteriile date, lista (ex: ratingSort este o metoda care sorteaza actorii, in functie de
+cerinta din input - ascendent sau descendent, dupa rating si dupa nume). 
+	* De asemenea, fiecare clasa are o metoda denumita write* (ex: writeSortedNames) care
+returneaza o lista, doar cu numele tuturor actorilor/filmelor/serialelor, ce indeplinesc cerintele
+date. 
+
+	Recomandările:
+
+	* In mod asemanator query-urilor, construiesc liste noi, in care adaug listele mele din baza
+de date, pe care ulterior le sortez, dupa criteriile din enunt. 
+	* In fiecare clasa ce contine liste, am metode specifice de cautare a entitatile, cu
+proprietatile cerute (ex: metoda searchGenre din clasa ShowsList cauta si intoarce o lista cu show-
+urile, ce au un anumit gen dat ca si parametru).
+	* Pentru cerinta "popular" mi-am construit o noua clasa denumita MyGenre, in care retin atat
+numele unui gen din baza de data, cat si numarul de vizualizari ale acelui gen. 
+	* Clasa GenresList, contine o lista de obiecte de tip MyGenre, cu toate denumirile de genuri
+existente in baza de date. 
+	* Clasa contine o metoda denumita calculatePopular, care adauga, pentru fiecare gen in parte,
+cautand in baza de date, a fiecarui show, numarul de vizualizari ale acelui gen.
+	* De asemenea, pe baza lui searchPopularSort sorteaza genurile dupa view-uri.
+
+	Campuri noi adaugate in clasele de input:
+
+	* In clasa Actor: - Am separat lista de filmography in 2 liste separate de filme si seriale.
+			  - Am adaugat un camp pentru a retine rating-ul acelui actor si unul pentru
+			    numarul total de premii primite.
+
+	* In clasa Movie: - Am adaugat un Map cu cheia user-ul ce a dat rating acelui film si
+ 			    valoarea numarul de rating-uri oferit.
+
+	
+	* In clasa Show: - Am adaugat indexul din lista de date de la input.
+			 - Un intreg care imi stocheaza de cate ori apare acel show in listele de
+			   favorite.
+
+
+	* In clasa Season: - Am adaugat un Map cu cheia user-ul ce a dat rating acelui sezon si
+			     valoarea numarul de rating-uri oferit.
+
+
+	* In clasa User: - Un intreg ce retine numarul de rating-uri pe care le-a dat acel user.
+
+
+
+
+
+
+
+
